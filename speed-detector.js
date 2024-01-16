@@ -1,21 +1,42 @@
-const calculate =document.querySelector(".AreaOfInput")
-const submitSpeed = document.querySelector(".submitWork")
+//Getting drivers speed
+let speed = prompt("enter speed: ")
 
-submitSpeed.addEventListener("click",()=>{
-  speedDetector(parseInt(calculate.value,10));
-});
+//Calculating demerit point and determining the output message.
+ 
+function speedMessage(driverSpeed){
+   //Defining speed limit 
+    let speedLimit = 70 ;
+    
+    let oneDemeritPoint =5;
 
-const speedDetector = (speed) => {
- if(!(speed<0)){
-  if ((speed - 70) / 5 > 12) {
-    alert("Licence Suspended");
-  }
-  if (speed < 70) {
-    alert("OK");
-  } else {
-    alert("Points: " + (speed - 70) / 5);
-  }
- }else{
-  alert("Invalid speed.Input a value from 0")
- }
-};
+    // Calculating demerit points
+    if(driverSpeed>speedLimit){
+
+        //Calculation of speed above the speedlimit
+        speedDifference = driverSpeed - speedLimit
+
+        //calculation of demerit points.
+        demeritPoints= speedDifference / oneDemeritPoint
+    }
+    else {
+        demeritPoints= 0
+    }
+
+    //Determining the output message according to the demerit points
+    if(demeritPoints>0.9 && demeritPoints<=11){
+        message =`Points: ${demeritPoints} `;
+    }
+
+    else if(demeritPoints>11){
+        message = "Lisence suspended";
+    }
+
+    else{
+        message= `Ok`;
+    }
+
+    return message;
+}
+
+//calling the function
+console.log(speedMessage(speed))
